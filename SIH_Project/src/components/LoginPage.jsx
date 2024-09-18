@@ -9,8 +9,8 @@ import AlumniAnimation from '../assets/Animations/AlumniAnimation.json';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("pandeyanub0@gmail.com");
-  const [password, setPassword] = useState("Arceus@1808");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
   const [RecaptchaMessage,setRecaptchaMessage] = useState(false);
@@ -114,7 +114,7 @@ export default function LoginPage() {
 
   return (
 
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 mb-16">
       <div className="flex min-h-full mt-20 flex-1 flex-col justify-center ml-4 py-12  hidden md:block">
         <Lottie animationData={AlumniAnimation} className="h-full w-full"/>
       </div>
