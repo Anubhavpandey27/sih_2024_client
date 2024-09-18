@@ -1,0 +1,75 @@
+// this code to be edited the login_page.jsx file function after backend
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!recaptchaToken) {
+    setRecaptchaMessage('Please complete the reCAPTCHA.');
+    setIsRecaptchaVerified(false);
+    return;
+  }
+  
+  try {
+    // Replace `API_URL` with your actual API URL
+    const response = await fetch(`${API_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        recaptchaToken
+      }),
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      console.log('Login success');
+      // Handle successful login (e.g., navigate to another page)
+    } else {
+      console.error('Login failed:', data.message);
+      // Handle login failure
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+  
+  // Reset message
+  setRecaptchaMessage('');
+};
+
+
+
+// this is backend code
+
+
+const axios = require('axios');
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/api/auth/login', async (req, res) => {
+  const { email, password, recaptchaToken } = req.body;
+
+  // Verify reCAPTCHA token
+  const secretKey = 'YOUR_SECRET_KEY'; // Replace with your actual secret key which is in .env
+  const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify`, null, {
+    params: {
+      secret: secretKey,
+      response: recaptchaToken,
+    }
+  });
+  
+  const verificationResult = response.data;
+
+  if (!verificationResult.success) {
+    return res.status(400).json({ message: 'reCAPTCHA verification failed' });
+  }
+
+  // Proceed with your login logic here
+
+  res.status(200).json({ message: 'Login successful' });
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));

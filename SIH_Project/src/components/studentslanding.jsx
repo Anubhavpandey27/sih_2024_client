@@ -1,0 +1,87 @@
+import React, { useState } from 'react';
+import Dashboard from './dashboardnew'; // Ensure this import is correct
+import EventSection from './Event';
+import JobPost from './Job';
+import AlumniPost from './studentpost';
+
+const LandingPage = () => {
+  const [user, setUser] = useState({ name: 'Student User' });
+  const [appliedJobs, setAppliedJobs] = useState([]);
+  const [dashboardData, setDashboardData] = useState({
+    referralsReceived: 3,
+    jobsApplied: appliedJobs.length,
+    eventsCreated: 2,
+    resumeViews: 45,
+  });
+
+  // Dummy job data
+  const jobPosts = [
+    { id: 1, title: 'Frontend Developer', company: 'WebInOrbit', location: 'Remote', description: 'Looking for a passionate frontend developer.', postedDate: '2024-09-18' },
+    { id: 2, title: 'Data Scientist', company: 'Tech Co', location: 'San Francisco, CA', description: 'Looking for a data-driven individual.', postedDate: '2024-09-17' },
+  ];
+
+  // Dummy event data
+  const events = [
+    { id: 1, title: 'Hackathon 2024', description: 'Annual college hackathon event', date: '2024-10-01', location: 'Campus Auditorium' },
+    { id: 2, title: 'Alumni Meetup', description: 'Networking event for alumni and students.', date: '2024-11-15', location: 'City Convention Center' },
+  ];
+
+  // Handle job application
+  const handleJobApplication = (jobId) => {
+    if (!appliedJobs.includes(jobId)) {
+      setAppliedJobs([...appliedJobs, jobId]);
+      setDashboardData(prevData => ({ ...prevData, jobsApplied: appliedJobs.length + 1 }));
+      alert('Application submitted successfully');
+    } else {
+      alert('You have already applied to this job.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-pink-100 via-purple-100 to-indigo-100">
+      <header className="w-full p-4 flex justify-between items-center">
+        <div className="bg-white border border-gray-300 rounded-full px-4 py-2 flex items-center">
+          <span className="font-bold text-gray-800">StudentConnect</span>
+          <span className="ml-1 text-orange-500">🎓</span>
+        </div>
+        <div className="text-gray-600 italic flex items-center">
+          Empowering students with opportunities <span className="ml-1">💼</span>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">Welcome, {user.name}!</h1>
+
+        {/* Student Dashboard */}
+        <section className="mb-12 bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Student Dashboard</h2>
+          <Dashboard data={dashboardData} />
+        </section>
+
+        {/* Job Postings Section */}
+        <section className="job-posts mb-12">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">Available Jobs</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {jobPosts.map(job => (
+              <JobPost key={job.id} job={job} onApply={handleJobApplication} />
+            ))}
+          </div>
+        </section>
+
+        {/* Event Creation and Viewing Section */}
+        <section className="mb-12 bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Create and View Events</h2>
+          <EventSection events={events} />
+        </section>
+
+        {/* Alumni Posts Section */}
+        <section className="alumni-posts bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Alumni Posts</h2>
+          <AlumniPost />
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default LandingPage;
