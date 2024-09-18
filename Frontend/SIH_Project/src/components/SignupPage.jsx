@@ -442,6 +442,7 @@
 import { createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 import { auth } from "../config/firebase.config";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import { useState } from "react";
 import Lottie from "lottie-react";
 import AlumniAnimation from "../assets/Animations/AlumniAnimation.json";
@@ -543,7 +544,7 @@ export default function SignUpPage() {
   // };
 
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 mb-16">
       <div className="flex min-h-full flex-1 flex-col justify-center lg:ml-40 py-12 mt-20 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#4a2c2a]">

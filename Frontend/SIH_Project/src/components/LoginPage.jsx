@@ -106,7 +106,7 @@ export default function LoginPage() {
 
   return (
 
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 mb-16">
       <div className="flex min-h-full mt-20 flex-1 flex-col justify-center ml-4 py-12  hidden md:block">
         <Lottie animationData={AlumniAnimation} className="h-full w-full" />
       </div>
