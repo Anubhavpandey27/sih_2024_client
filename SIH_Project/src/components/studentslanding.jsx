@@ -3,7 +3,7 @@ import Dashboard from './dashboardnew'; // Ensure this import is correct
 import EventSection from './Event';
 import JobPost from './Job';
 import AlumniPost from './studentpost';
-
+import clgLogo from '../assets/Images/GECG_logo.png'
 const LandingPage = () => {
   const [user, setUser] = useState({ name: 'Student User' });
   const [appliedJobs, setAppliedJobs] = useState([]);
@@ -13,6 +13,10 @@ const LandingPage = () => {
     eventsCreated: 2,
     resumeViews: 45,
   });
+  const handleSignout = () => {
+    localStorage.removeItem('jwtToken'); 
+    window.location.href = '/'; 
+  };
 
   // Dummy job data
   const jobPosts = [
@@ -39,14 +43,17 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-pink-100 via-purple-100 to-indigo-100">
-      <header className="w-full p-4 flex justify-between items-center">
-        <div className="bg-white border border-gray-300 rounded-full px-4 py-2 flex items-center">
-          <span className="font-bold text-gray-800">StudentConnect</span>
-          <span className="ml-1 text-orange-500">🎓</span>
+      <header className="w-full p-4 flex  items-center">
+        <div className="bg-white border border-gray-300 rounded-full px-4 mx-4 py-2 flex items-center">
+          <span className="font-bold text-gray-800">AlumniConnect</span>
+          <span className="ml-1 text-orange-500">🤝</span>
         </div>
         <div className="text-gray-600 italic flex items-center">
-          Empowering students with opportunities <span className="ml-1">💼</span>
+          <span className='hidden md:block'>Government Engineering College, Gandhinagar</span>
+          <img src={clgLogo} alt="" className='h-16 w-16 mx-2'/>
         </div>
+
+        <button onClick = {handleSignout} className='absolute right-6 m-2 p-2 border-2 border-black rounded-xl bg-white font-bold hover:bg-black hover:text-white'>Sign Out</button>
       </header>
 
       <main className="container mx-auto px-4 py-8">

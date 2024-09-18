@@ -3,7 +3,7 @@ import JobPost from './JobPost';
 import Dashboard from './Dashboard';
 import EventSection from './EventSection';
 import AlumniPost from './AlumniPost';
-
+import clgLogo from '../assets/Images/GECG_logo.png'
 const LandingPage = () => {
   const [user, setUser] = useState({ name: 'Alumni User' });
 
@@ -19,6 +19,12 @@ const LandingPage = () => {
     profileViews: 52
   });
 
+  const handleSignout = () => {
+    // localStorage.removeItem('jwtToken'); 
+    window.location.href = '/'; 
+  };
+  
+
   const [events, setEvents] = useState([
     { id: 1, title: 'Hackathon 2024', description: 'Annual college hackathon event', date: '2024-10-01', location: 'Campus Auditorium' },
     { id: 2, title: 'Alumni Meetup', description: 'Networking event for alumni and students.', date: '2024-11-15', location: 'City Convention Center' },
@@ -26,14 +32,17 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-pink-100 via-purple-100 to-indigo-100">
-      <header className="w-full p-4 flex justify-between items-center">
-        <div className="bg-white border border-gray-300 rounded-full px-4 py-2 flex items-center">
+      <header className="w-full p-4 flex  items-center">
+        <div className="bg-white border border-gray-300 rounded-full px-4 mx-4 py-2 flex items-center">
           <span className="font-bold text-gray-800">AlumniConnect</span>
           <span className="ml-1 text-orange-500">🤝</span>
         </div>
         <div className="text-gray-600 italic flex items-center">
-          Connecting Alumni's all over the globe <span className="ml-1">🌍</span>
+          <span className='hidden md:block'>Government Engineering College, Gandhinagar</span>
+          <img src={clgLogo} alt="" className='h-16 w-16 mx-2'/>
         </div>
+
+        <button onClick = {handleSignout} className='absolute right-6 m-2 p-2 border-2 border-black rounded-xl bg-white font-bold hover:bg-black hover:text-white'>Sign Out</button>
       </header>
 
       <main className="container mx-auto px-4 py-8">

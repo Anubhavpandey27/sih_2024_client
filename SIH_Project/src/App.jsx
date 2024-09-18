@@ -66,12 +66,16 @@ function App() {
                 <>{<Navbar/> <SignUpPage/>}</>
               )</>
             } */}
+
+          {/* <Route path='/landing' element={<LandingPage/>}/>
+          <Route path = '/student' element={<StudentPage/>}/> */}
           <Route path="/"
             element={
               isAuthenticated == 1 ? (
                 Role=="Alumini"?<LandingPage/>:<StudentPage/>
               ) : (
                 <><Navbar/><SignUpPage/><Footer/></>
+                // <LandingPage/>
                 
               )
             }
