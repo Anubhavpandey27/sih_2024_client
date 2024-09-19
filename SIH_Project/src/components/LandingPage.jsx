@@ -20,7 +20,7 @@ const LandingPage = () => {
   });
 
   const handleSignout = () => {
-    // localStorage.removeItem('jwtToken'); 
+    localStorage.removeItem('jwtToken'); 
     window.location.href = '/'; 
   };
   
